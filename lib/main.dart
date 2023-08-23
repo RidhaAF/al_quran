@@ -1,27 +1,16 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:al_quran/cubits/surah/surah_cubit.dart';
-import 'package:al_quran/pages/home/home_page.dart';
+import 'package:al_quran/cubits/surah_detail/surah_detail_cubit.dart';
 import 'package:al_quran/themes/default_themes.dart';
+import 'package:al_quran/utilities/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   runApp(MyApp(savedThemeMode: savedThemeMode));
 }
-
-final _router = GoRouter(
-  initialLocation: '/',
-  routes: [
-    GoRoute(
-      name: 'home',
-      path: '/',
-      builder: (context, state) => const HomePage(),
-    ),
-  ],
-);
 
 class MyApp extends StatelessWidget {
   final AdaptiveThemeMode? savedThemeMode;
@@ -34,6 +23,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SurahCubit(),
         ),
+        BlocProvider(
+          create: (context) => SurahDetailCubit(),
+        ),
       ],
       child: AdaptiveTheme(
         light: DefaultThemes().light,
@@ -44,7 +36,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: lightTheme,
           darkTheme: darkTheme,
-          routerConfig: _router,
+          routerConfig: defaultRouter,
         ),
       ),
     );
