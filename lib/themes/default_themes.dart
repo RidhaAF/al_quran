@@ -13,7 +13,10 @@ class DefaultThemes {
     fontFamily: GoogleFonts.ibmPlexSansArabic().fontFamily,
     textTheme: TextTheme(
       titleSmall: GoogleFonts.ibmPlexSansArabic(
-        color: greyColor,
+        color: mutedColor,
+      ),
+      labelMedium: GoogleFonts.ibmPlexSansArabic(
+        color: mutedColor,
       ),
     ),
     appBarTheme: AppBarTheme(
@@ -31,6 +34,9 @@ class DefaultThemes {
     fontFamily: GoogleFonts.ibmPlexSansArabic().fontFamily,
     textTheme: TextTheme(
       titleSmall: GoogleFonts.ibmPlexSansArabic(
+        color: mutedColor,
+      ),
+      labelMedium: GoogleFonts.ibmPlexSansArabic(
         color: mutedColor,
       ),
     ),
