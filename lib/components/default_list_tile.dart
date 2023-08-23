@@ -42,6 +42,7 @@ class DefaultListTile extends StatelessWidget {
         textScaleFactor: 1.0,
       ),
       onTap: onTap != null ? onTap! : null,
+      splashColor: primaryColor.withOpacity(0.2),
       dense: true,
       contentPadding: EdgeInsets.symmetric(horizontal: defaultMargin / 2),
     );

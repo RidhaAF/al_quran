@@ -1,7 +1,10 @@
 import 'package:al_quran/components/default_list_tile.dart';
 import 'package:al_quran/components/default_refresh_indicator.dart';
+import 'package:al_quran/cubits/surah/surah_cubit.dart';
+import 'package:al_quran/models/surah_model.dart';
 import 'package:al_quran/utilities/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -50,23 +53,44 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _listSurah() {
-    return ListView.separated(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: 25,
-      separatorBuilder: (context, index) {
-        return const Divider(height: 0);
-      },
-      itemBuilder: (context, i) {
-        int surahNumber = i + 1;
+    return BlocBuilder<SurahCubit, SurahState>(
+      builder: (context, state) {
+        if (state is SurahInitial) {
+          return Container();
+        } else if (state is SurahLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is SurahLoaded) {
+          List<Surah>? surahs = state.surahModel.data;
 
-        return DefaultListTile(
-          leading: surahNumber.toString(),
-          title: 'Al-Fatihah',
-          subtitle: 'The Opening • 7 verses • Meccan',
-          trailing: 'الفاتحة',
-          onTap: () {},
-        );
+          return ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: surahs?.length ?? 0,
+            separatorBuilder: (context, i) {
+              return const Divider(height: 0);
+            },
+            itemBuilder: (context, i) {
+              Surah? surah = surahs?[i];
+              String? surahNumber = surah?.number?.toString() ?? '';
+              String? surahName = surah?.name?.transliteration?.id ?? '';
+              String? surahNameTranslation = surah?.name?.translation?.en ?? '';
+              String? numberOfVerses = surah?.numberOfVerses?.toString() ?? '';
+              String? revelation = surah?.revelation?.id ?? '';
+              String surahSubtitle =
+                  '$surahNameTranslation • $numberOfVerses verses • $revelation';
+              String? surahNameArabic = surah?.name?.short ?? '';
+
+              return DefaultListTile(
+                leading: surahNumber.toString(),
+                title: surahName,
+                subtitle: surahSubtitle,
+                trailing: surahNameArabic,
+                onTap: () {},
+              );
+            },
+          );
+        }
+        return Container();
       },
     );
   }

@@ -1,3 +1,3 @@
 class Env {
-  static const baseURL = 'https://api.themoviedb.org/3';
+  static const baseURL = 'https://api.quran.gading.dev';
 }

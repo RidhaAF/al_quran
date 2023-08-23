@@ -1,7 +1,9 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:al_quran/cubits/surah/surah_cubit.dart';
 import 'package:al_quran/pages/home/home_page.dart';
 import 'package:al_quran/themes/default_themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 void main() async {
@@ -27,16 +29,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AdaptiveTheme(
-      light: DefaultThemes().light,
-      dark: DefaultThemes().dark,
-      initial: savedThemeMode ?? AdaptiveThemeMode.system,
-      builder: (lightTheme, darkTheme) => MaterialApp.router(
-        title: 'Al-Quran',
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        routerConfig: _router,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SurahCubit(),
+        ),
+      ],
+      child: AdaptiveTheme(
+        light: DefaultThemes().light,
+        dark: DefaultThemes().dark,
+        initial: savedThemeMode ?? AdaptiveThemeMode.system,
+        builder: (lightTheme, darkTheme) => MaterialApp.router(
+          title: 'Al-Quran',
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          routerConfig: _router,
+        ),
       ),
     );
   }
