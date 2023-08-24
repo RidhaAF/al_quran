@@ -5,6 +5,7 @@ import 'package:al_quran/cubits/surah/surah_cubit.dart';
 import 'package:al_quran/models/surah_model.dart';
 import 'package:al_quran/utilities/constants.dart';
 import 'package:al_quran/utilities/functions.dart';
+import 'package:al_quran/widgets/default_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
         if (state is SurahInitial) {
           return Container();
         } else if (state is SurahLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return listViewSeparatedShimmer();
         } else if (state is SurahLoaded) {
           List<Surah>? surahs = state.surahModel.data;
 
