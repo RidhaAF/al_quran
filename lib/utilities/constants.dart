@@ -28,7 +28,7 @@ Color bgColorLight3 = const Color(0xFFE9E9E9);
 
 double largeTitleFS = 32;
 double title1FS = 28;
-double title2FS = 22;
+double title2FS = 24;
 double title3FS = 20;
 double headlineFS = 18;
 double bodyFS = 18;
@@ -58,7 +58,7 @@ TextStyle title1 = GoogleFonts.ibmPlexSansArabic(
   fontSize: title1FS,
 );
 
-// 22
+// 24
 TextStyle title2 = GoogleFonts.ibmPlexSansArabic(
   fontSize: title2FS,
 );

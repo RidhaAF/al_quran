@@ -12,8 +12,8 @@ class SurahCubit extends Cubit<SurahState> {
   }
 
   void getSurahs() async {
+    emit(SurahLoading());
     try {
-      emit(SurahLoading());
       surahModel = await SurahService().getSurahs();
       emit(SurahLoaded(surahModel));
     } catch (e) {

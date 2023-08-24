@@ -21,6 +21,13 @@ class DefaultThemes {
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: primaryColor,
+      foregroundColor: whiteColor,
+      iconTheme: IconThemeData(
+        color: whiteColor,
+      ),
+      actionsIconTheme: IconThemeData(
+        color: whiteColor,
+      ),
     ),
   );
 
@@ -42,6 +49,13 @@ class DefaultThemes {
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: primaryColor,
+      foregroundColor: whiteColor,
+      iconTheme: IconThemeData(
+        color: whiteColor,
+      ),
+      actionsIconTheme: IconThemeData(
+        color: whiteColor,
+      ),
     ),
   );
 }

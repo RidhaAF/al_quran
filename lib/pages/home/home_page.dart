@@ -1,10 +1,13 @@
-import 'package:al_quran/components/default_list_tile.dart';
-import 'package:al_quran/components/default_refresh_indicator.dart';
+import 'package:al_quran/widgets/default_app_bar.dart';
+import 'package:al_quran/widgets/default_list_tile.dart';
+import 'package:al_quran/widgets/default_refresh_indicator.dart';
 import 'package:al_quran/cubits/surah/surah_cubit.dart';
 import 'package:al_quran/models/surah_model.dart';
 import 'package:al_quran/utilities/constants.dart';
+import 'package:al_quran/utilities/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,35 +20,39 @@ class _HomePageState extends State<HomePage> {
   Future<void> _onRefresh() async {
     await Future.delayed(const Duration(seconds: 1));
     if (mounted) {
+      _getData();
       setState(() {});
     }
   }
 
+  _getData() {
+    context.read<SurahCubit>().getSurahs();
+  }
+
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = isDarkMode(context)
+        ? blackColor.withOpacity(0.0)
+        : whiteColor.withOpacity(0.0);
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Al-Quran',
-          style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                color: primaryColor,
-                fontWeight: bold,
-              ),
-          textScaleFactor: 1.0,
-        ),
-        backgroundColor: Colors.transparent,
+      appBar: DefaultAppBar(
+        title: 'Al-Quran',
+        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+              color: primaryColor,
+              fontWeight: bold,
+            ),
+        backgroundColor: backgroundColor,
         centerTitle: false,
       ),
-      body: SafeArea(
-        child: DefaultRefreshIndicator(
-          onRefresh: _onRefresh,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: ListView(
-              children: [
-                _listSurah(),
-              ],
-            ),
+      body: DefaultRefreshIndicator(
+        onRefresh: _onRefresh,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+          child: ListView(
+            children: [
+              _listSurah(),
+            ],
           ),
         ),
       ),
@@ -66,9 +73,7 @@ class _HomePageState extends State<HomePage> {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: surahs?.length ?? 0,
-            separatorBuilder: (context, i) {
-              return const Divider(height: 0);
-            },
+            separatorBuilder: (context, i) => const Divider(height: 0),
             itemBuilder: (context, i) {
               Surah? surah = surahs?[i];
               String? surahNumber = surah?.number?.toString() ?? '';
@@ -85,7 +90,9 @@ class _HomePageState extends State<HomePage> {
                 title: surahName,
                 subtitle: surahSubtitle,
                 trailing: surahNameArabic,
-                onTap: () {},
+                onTap: () {
+                  context.push('/surah/$surahNumber', extra: surah);
+                },
               );
             },
           );
