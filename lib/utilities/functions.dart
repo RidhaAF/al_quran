@@ -1,6 +1,9 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:al_quran/utilities/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+
+final box = GetStorage();
 
 bool isDarkMode(BuildContext context) {
   return AdaptiveTheme.of(context).brightness == Brightness.dark;
@@ -19,4 +22,16 @@ String arabicNumberConverter(String number) {
   }
 
   return res;
+}
+
+bool getTranslation() {
+  return box.read('isEnglish') ?? true;
+}
+
+bool setTranslation() {
+  bool isEnglish = box.read('isEnglish') ?? true;
+  isEnglish = !isEnglish;
+  box.write('isEnglish', isEnglish);
+
+  return isEnglish;
 }
