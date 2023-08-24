@@ -23,15 +23,3 @@ String arabicNumberConverter(String number) {
 
   return res;
 }
-
-bool getTranslation() {
-  return box.read('isEnglish') ?? true;
-}
-
-bool setTranslation() {
-  bool isEnglish = box.read('isEnglish') ?? true;
-  isEnglish = !isEnglish;
-  box.write('isEnglish', isEnglish);
-
-  return isEnglish;
-}

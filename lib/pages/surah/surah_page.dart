@@ -1,10 +1,12 @@
 import 'package:al_quran/cubits/surah_detail/surah_detail_cubit.dart';
+import 'package:al_quran/cubits/translate/translate_cubit.dart';
 import 'package:al_quran/models/surah_detail_model.dart';
 import 'package:al_quran/models/surah_model.dart';
 import 'package:al_quran/widgets/default_app_bar.dart';
 import 'package:al_quran/widgets/default_refresh_indicator.dart';
 import 'package:al_quran/utilities/constants.dart';
 import 'package:al_quran/widgets/default_shimmer.dart';
+import 'package:al_quran/widgets/translate_icon_button.dart';
 import 'package:al_quran/widgets/verse_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,6 +22,8 @@ class SurahPage extends StatefulWidget {
 }
 
 class _SurahPageState extends State<SurahPage> {
+  bool isEnglish = true;
+
   Future<void> _onRefresh() async {
     await Future.delayed(const Duration(seconds: 1));
     if (mounted) {
@@ -34,22 +38,54 @@ class _SurahPageState extends State<SurahPage> {
         .getSurah(surahNumber: widget.surahNumber ?? '0');
   }
 
+  void _getTranslation() {
+    isEnglish = context.read<TranslateCubit>().getTranslation();
+    setState(() {});
+  }
+
+  void _handleTranslation() {
+    isEnglish = context.read<TranslateCubit>().setTranslation();
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
+    _getTranslation();
     _getData();
   }
 
   @override
   Widget build(BuildContext context) {
     String? surahNumber = widget.surahNumber ?? '0';
-    String? surahName = widget.surah?.name?.transliteration?.id ?? '';
-    String? surahNameTranslation = widget.surah?.name?.translation?.en ?? '';
+    String? surahNameEn = widget.surah?.name?.transliteration?.en ?? '';
+    String? surahNameId = widget.surah?.name?.transliteration?.id ?? '';
+    String? surahNameTranslated = isEnglish ? surahNameEn : surahNameId;
+    String? surahNameTranslationEn = widget.surah?.name?.translation?.en ?? '';
+    String? surahNameTranslationId = widget.surah?.name?.translation?.id ?? '';
+    String? surahNameTranslationTranslated =
+        isEnglish ? surahNameTranslationEn : surahNameTranslationId;
 
     return Scaffold(
       appBar: DefaultAppBar(
-        title: '$surahNumber. $surahName',
-        subtitle: surahNameTranslation,
+        title: '$surahNumber. $surahNameTranslated',
+        subtitle: surahNameTranslationTranslated,
+        actions: [
+          BlocListener<TranslateCubit, TranslateState>(
+            listener: (context, state) {
+              if (state is TranslateLoaded) {
+                isEnglish = state.isEnglish;
+                setState(() {});
+              }
+            },
+            child: TranslateIconButton(
+              isEnglish: isEnglish,
+              onPressed: () {
+                _handleTranslation();
+              },
+            ),
+          ),
+        ],
       ),
       body: DefaultRefreshIndicator(
         onRefresh: _onRefresh,
@@ -116,13 +152,16 @@ class _SurahPageState extends State<SurahPage> {
           String? verseNumber = verse?.number?.inSurah?.toString() ?? '';
           String? verseArabic = verse?.word?.arab ?? '';
           String? verseTransliteration = verse?.word?.transliteration?.en ?? '';
-          String? verseTranslation = verse?.translation?.en ?? '';
+          String? verseTranslationEn = verse?.translation?.en ?? '';
+          String? verseTranslationId = verse?.translation?.id ?? '';
+          String? verseTranslationTranslated =
+              isEnglish ? verseTranslationEn : verseTranslationId;
 
           return VerseItem(
             verseNumber: verseNumber,
             verseArabic: verseArabic,
             verseTransliteration: verseTransliteration,
-            verseTranslation: verseTranslation,
+            verseTranslation: verseTranslationTranslated,
           );
         },
       ),

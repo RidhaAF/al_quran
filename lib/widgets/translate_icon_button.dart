@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class TranslateIconButton extends StatelessWidget {
   final bool isEnglish;
   final Function() onPressed;
+  final Color? iconColor;
   const TranslateIconButton({
     super.key,
     required this.isEnglish,
     required this.onPressed,
+    this.iconColor,
   });
 
   @override
@@ -18,8 +20,11 @@ class TranslateIconButton extends StatelessWidget {
 
     return IconButton(
       onPressed: onPressed,
-      icon: const Icon(Icons.translate_rounded),
-      highlightColor: primaryColor,
+      icon: Icon(
+        Icons.translate_rounded,
+        color: iconColor,
+      ),
+      highlightColor: mutedColor.withOpacity(0.3),
       tooltip: tooltip,
     );
   }

@@ -1,6 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:al_quran/cubits/surah/surah_cubit.dart';
 import 'package:al_quran/cubits/surah_detail/surah_detail_cubit.dart';
+import 'package:al_quran/cubits/translate/translate_cubit.dart';
 import 'package:al_quran/themes/default_themes.dart';
 import 'package:al_quran/utilities/routes.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => SurahDetailCubit(),
+        ),
+        BlocProvider(
+          create: (context) => TranslateCubit(),
         ),
       ],
       child: AdaptiveTheme(

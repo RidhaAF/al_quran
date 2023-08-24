@@ -1,3 +1,4 @@
+import 'package:al_quran/cubits/translate/translate_cubit.dart';
 import 'package:al_quran/widgets/default_app_bar.dart';
 import 'package:al_quran/widgets/default_list_tile.dart';
 import 'package:al_quran/widgets/default_refresh_indicator.dart';
@@ -33,15 +34,20 @@ class _HomePageState extends State<HomePage> {
     context.read<SurahCubit>().getSurahs();
   }
 
+  void _getTranslation() {
+    isEnglish = context.read<TranslateCubit>().getTranslation();
+    setState(() {});
+  }
+
   void _handleTranslation() {
-    isEnglish = setTranslation();
+    isEnglish = context.read<TranslateCubit>().setTranslation();
     setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
-    isEnglish = getTranslation();
+    _getTranslation();
   }
 
   @override
@@ -54,11 +60,20 @@ class _HomePageState extends State<HomePage> {
       appBar: DefaultAppBar(
         title: 'Al-Quran',
         actions: [
-          TranslateIconButton(
-            isEnglish: isEnglish,
-            onPressed: () {
-              _handleTranslation();
+          BlocListener<TranslateCubit, TranslateState>(
+            listener: (context, state) {
+              if (state is TranslateLoaded) {
+                isEnglish = state.isEnglish;
+                setState(() {});
+              }
             },
+            child: TranslateIconButton(
+              isEnglish: isEnglish,
+              onPressed: () {
+                _handleTranslation();
+              },
+              iconColor: primaryColor,
+            ),
           ),
         ],
         style: Theme.of(context).textTheme.headlineLarge?.copyWith(
