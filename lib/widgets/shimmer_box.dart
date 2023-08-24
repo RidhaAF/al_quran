@@ -30,7 +30,8 @@ class ShimmerBox extends StatelessWidget {
 
   Widget _shimmer(context) {
     return Shimmer.fromColors(
-      baseColor: isDarkMode(context) ? bgColorDark6 : mutedColor,
+      baseColor:
+          isDarkMode(context) ? bgColorDark6 : primaryColor.withOpacity(0.5),
       highlightColor: isDarkMode(context) ? primaryColor : secondaryColor,
       child: Container(
         color: mutedColor,

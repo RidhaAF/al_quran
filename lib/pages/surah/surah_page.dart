@@ -4,6 +4,7 @@ import 'package:al_quran/models/surah_model.dart';
 import 'package:al_quran/widgets/default_app_bar.dart';
 import 'package:al_quran/widgets/default_refresh_indicator.dart';
 import 'package:al_quran/utilities/constants.dart';
+import 'package:al_quran/widgets/default_shimmer.dart';
 import 'package:al_quran/widgets/verse_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,27 +47,27 @@ class _SurahPageState extends State<SurahPage> {
 
     return Scaffold(
       appBar: DefaultAppBar(title: '$surahNumber. $surahName'),
-      body: BlocBuilder<SurahDetailCubit, SurahDetailState>(
-        builder: (context, state) {
-          if (state is SurahDetailInitial) {
-            return Container();
-          } else if (state is SurahDetailLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is SurahDetailLoaded) {
-            SurahDetail? surahDetail = state.surahDetailModel.data;
+      body: DefaultRefreshIndicator(
+        onRefresh: _onRefresh,
+        child: BlocBuilder<SurahDetailCubit, SurahDetailState>(
+          builder: (context, state) {
+            if (state is SurahDetailInitial) {
+              return Container();
+            } else if (state is SurahDetailLoading) {
+              return surahDetailShimmer();
+            } else if (state is SurahDetailLoaded) {
+              SurahDetail? surahDetail = state.surahDetailModel.data;
 
-            return DefaultRefreshIndicator(
-              onRefresh: _onRefresh,
-              child: ListView(
+              return ListView(
                 children: [
                   _preBismillah(surahDetail),
                   _verses(surahDetail),
                 ],
-              ),
-            );
-          }
-          return Container();
-        },
+              );
+            }
+            return Container();
+          },
+        ),
       ),
     );
   }
