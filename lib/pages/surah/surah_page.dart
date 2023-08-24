@@ -7,6 +7,7 @@ import 'package:al_quran/utilities/constants.dart';
 import 'package:al_quran/widgets/verse_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SurahPage extends StatefulWidget {
   final String? surahNumber;
@@ -81,7 +82,9 @@ class _SurahPageState extends State<SurahPage> {
       child: Center(
         child: Text(
           preBismillah.word?.arab ?? '',
-          style: Theme.of(context).textTheme.headlineLarge,
+          style: GoogleFonts.scheherazadeNew(
+            fontSize: title1FS,
+          ),
         ),
       ),
     );

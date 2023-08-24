@@ -1,5 +1,7 @@
 import 'package:al_quran/utilities/constants.dart';
+import 'package:al_quran/utilities/functions.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class VerseItem extends StatelessWidget {
   final String? verseNumber;
@@ -16,15 +18,25 @@ class VerseItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String arabicNumber = arabicNumberConverter(verseNumber ?? '0');
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: defaultMargin / 2),
-        Text(
-          verseArabic ?? '',
-          style: Theme.of(context).textTheme.titleLarge,
-          textDirection: TextDirection.rtl,
-          textScaleFactor: 1.0,
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                '${verseArabic ?? ''} ﴿$arabicNumber﴾',
+                style: GoogleFonts.scheherazadeNew(
+                  fontSize: title2FS,
+                ),
+                textDirection: TextDirection.rtl,
+                textScaleFactor: 1.0,
+              ),
+            ),
+          ],
         ),
         SizedBox(height: defaultMargin / 2),
         Text(

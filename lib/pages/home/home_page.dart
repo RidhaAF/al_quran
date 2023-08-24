@@ -45,16 +45,14 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: backgroundColor,
         centerTitle: false,
       ),
-      body: SafeArea(
-        child: DefaultRefreshIndicator(
-          onRefresh: _onRefresh,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: ListView(
-              children: [
-                _listSurah(),
-              ],
-            ),
+      body: DefaultRefreshIndicator(
+        onRefresh: _onRefresh,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+          child: ListView(
+            children: [
+              _listSurah(),
+            ],
           ),
         ),
       ),

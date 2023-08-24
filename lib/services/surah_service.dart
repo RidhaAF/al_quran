@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:al_quran/helpers/default_dio.dart';
 import 'package:al_quran/models/surah_detail_model.dart';
 import 'package:al_quran/models/surah_model.dart';
@@ -27,7 +29,12 @@ class SurahService {
     try {
       Response response = await DefaultDio().option.get(url);
 
-      final data = SurahDetailModel.fromJson(response.data);
+      final SurahDetailModel data;
+      if (response.data is String) {
+        data = SurahDetailModel.fromJson(jsonDecode(response.data));
+      } else {
+        data = SurahDetailModel.fromJson(response.data);
+      }
       return data;
     } catch (e) {
       if (kDebugMode) {

@@ -1,5 +1,6 @@
 import 'package:al_quran/utilities/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DefaultListTile extends StatelessWidget {
   final String? leading;
@@ -36,9 +37,10 @@ class DefaultListTile extends StatelessWidget {
       ),
       trailing: Text(
         trailing ?? '',
-        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: primaryColor,
-            ),
+        style: GoogleFonts.scheherazadeNew(
+          color: primaryColor,
+          fontSize: title2FS,
+        ),
         textScaleFactor: 1.0,
       ),
       onTap: onTap != null ? onTap! : null,
