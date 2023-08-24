@@ -27,10 +27,11 @@ class VerseItem extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Text(
+              child: SelectableText(
                 '${verseArabic ?? ''} ﴿$arabicNumber﴾',
                 style: GoogleFonts.scheherazadeNew(
                   fontSize: title2FS,
+                  height: 2.0,
                 ),
                 textDirection: TextDirection.rtl,
                 textScaleFactor: 1.0,
@@ -39,13 +40,13 @@ class VerseItem extends StatelessWidget {
           ],
         ),
         SizedBox(height: defaultMargin / 2),
-        Text(
+        SelectableText(
           '${verseNumber ?? ''}. ${verseTransliteration ?? ''}',
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.labelLarge,
           textScaleFactor: 1.0,
         ),
         SizedBox(height: defaultMargin / 2),
-        Text(
+        SelectableText(
           '${verseNumber ?? ''}. ${verseTranslation ?? ''}',
           style: Theme.of(context).textTheme.labelMedium,
           textScaleFactor: 1.0,

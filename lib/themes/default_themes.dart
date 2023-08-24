@@ -13,11 +13,15 @@ class DefaultThemes {
     fontFamily: GoogleFonts.ibmPlexSansArabic().fontFamily,
     textTheme: TextTheme(
       titleSmall: GoogleFonts.ibmPlexSansArabic(
-        color: mutedColor,
+        color: greyColor,
       ),
       labelMedium: GoogleFonts.ibmPlexSansArabic(
-        color: mutedColor,
+        color: greyColor,
       ),
+    ),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: primaryColor,
+      selectionHandleColor: primaryColor,
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: primaryColor,
@@ -27,6 +31,10 @@ class DefaultThemes {
       ),
       actionsIconTheme: IconThemeData(
         color: whiteColor,
+      ),
+      titleTextStyle: TextStyle(
+        fontSize: bodyFS,
+        fontWeight: semiBold,
       ),
     ),
   );
@@ -47,6 +55,10 @@ class DefaultThemes {
         color: mutedColor,
       ),
     ),
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: primaryColor,
+      selectionHandleColor: primaryColor,
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: primaryColor,
       foregroundColor: whiteColor,
@@ -55,6 +67,10 @@ class DefaultThemes {
       ),
       actionsIconTheme: IconThemeData(
         color: whiteColor,
+      ),
+      titleTextStyle: TextStyle(
+        fontSize: bodyFS,
+        fontWeight: semiBold,
       ),
     ),
   );
