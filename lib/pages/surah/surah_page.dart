@@ -44,9 +44,13 @@ class _SurahPageState extends State<SurahPage> {
   Widget build(BuildContext context) {
     String? surahNumber = widget.surahNumber ?? '0';
     String? surahName = widget.surah?.name?.transliteration?.id ?? '';
+    String? surahNameTranslation = widget.surah?.name?.translation?.en ?? '';
 
     return Scaffold(
-      appBar: DefaultAppBar(title: '$surahNumber. $surahName'),
+      appBar: DefaultAppBar(
+        title: '$surahNumber. $surahName',
+        subtitle: surahNameTranslation,
+      ),
       body: DefaultRefreshIndicator(
         onRefresh: _onRefresh,
         child: BlocBuilder<SurahDetailCubit, SurahDetailState>(
@@ -85,6 +89,7 @@ class _SurahPageState extends State<SurahPage> {
           preBismillah.word?.arab ?? '',
           style: GoogleFonts.scheherazadeNew(
             fontSize: title1FS,
+            height: 2.0,
           ),
         ),
       ),
