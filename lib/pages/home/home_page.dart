@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage> {
             return const Default404();
           }
           return Padding(
-            padding: EdgeInsets.all(defaultMargin),
+            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -201,7 +201,7 @@ class _HomePageState extends State<HomePage> {
                 String? surahNameArabic = surah?.name?.short ?? '';
 
                 return DefaultListTile(
-                  leading: surahNumber.toString(),
+                  leading: surahNumber,
                   title: surahNameTranslated,
                   subtitle: surahSubtitle,
                   trailing: surahNameArabic,

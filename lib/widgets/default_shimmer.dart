@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 Widget listViewSeparatedShimmer({int? itemCount}) {
   return Padding(
-    padding: EdgeInsets.all(defaultMargin),
+    padding: EdgeInsets.symmetric(horizontal: defaultMargin),
     child: ListView.separated(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,

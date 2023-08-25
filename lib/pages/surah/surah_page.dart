@@ -149,7 +149,7 @@ class _SurahPageState extends State<SurahPage> {
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: verses?.length ?? 0,
-        separatorBuilder: (context, i) => const Divider(),
+        separatorBuilder: (context, i) => const Divider(height: 0),
         itemBuilder: (context, i) {
           Verse? verse = verses?[i];
           String? verseNumber = verse?.number?.inSurah?.toString() ?? '';
