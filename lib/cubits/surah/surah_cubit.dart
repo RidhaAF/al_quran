@@ -21,7 +21,11 @@ class SurahCubit extends Cubit<SurahState> {
     }
   }
 
-  getSurahsData() {
+  getSurahModel() {
     return surahModel;
+  }
+
+  getSurahsData() {
+    return surahModel.data ?? [];
   }
 }
