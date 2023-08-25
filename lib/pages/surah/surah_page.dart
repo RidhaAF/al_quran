@@ -2,6 +2,7 @@ import 'package:al_quran/cubits/surah_detail/surah_detail_cubit.dart';
 import 'package:al_quran/cubits/translate/translate_cubit.dart';
 import 'package:al_quran/models/surah_detail_model.dart';
 import 'package:al_quran/models/surah_model.dart';
+import 'package:al_quran/widgets/default_404.dart';
 import 'package:al_quran/widgets/default_app_bar.dart';
 import 'package:al_quran/widgets/default_refresh_indicator.dart';
 import 'package:al_quran/utilities/constants.dart';
@@ -10,6 +11,7 @@ import 'package:al_quran/widgets/translate_icon_button.dart';
 import 'package:al_quran/widgets/verse_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SurahPage extends StatefulWidget {
@@ -23,6 +25,8 @@ class SurahPage extends StatefulWidget {
 
 class _SurahPageState extends State<SurahPage> {
   bool isEnglish = true;
+  String? surahNumber = '0';
+  String? surahNameTranslated = '';
 
   Future<void> _onRefresh() async {
     await Future.delayed(const Duration(seconds: 1));
@@ -57,10 +61,10 @@ class _SurahPageState extends State<SurahPage> {
 
   @override
   Widget build(BuildContext context) {
-    String? surahNumber = widget.surahNumber ?? '0';
+    surahNumber = widget.surahNumber ?? '0';
     String? surahNameEn = widget.surah?.name?.transliteration?.en ?? '';
     String? surahNameId = widget.surah?.name?.transliteration?.id ?? '';
-    String? surahNameTranslated = isEnglish ? surahNameEn : surahNameId;
+    surahNameTranslated = isEnglish ? surahNameEn : surahNameId;
     String? surahNameTranslationEn = widget.surah?.name?.translation?.en ?? '';
     String? surahNameTranslationId = widget.surah?.name?.translation?.id ?? '';
     String? surahNameTranslationTranslated =
@@ -105,7 +109,7 @@ class _SurahPageState extends State<SurahPage> {
                 ],
               );
             }
-            return Container();
+            return const Default404();
           },
         ),
       ),
@@ -136,7 +140,6 @@ class _SurahPageState extends State<SurahPage> {
     List<Verse>? verses = surahDetail?.verses;
 
     return Container(
-      padding: EdgeInsets.all(defaultMargin),
       margin: EdgeInsets.all(defaultMargin),
       decoration: BoxDecoration(
         color: primaryColor.withOpacity(0.1),
@@ -157,11 +160,23 @@ class _SurahPageState extends State<SurahPage> {
           String? verseTranslationTranslated =
               isEnglish ? verseTranslationEn : verseTranslationId;
 
-          return VerseItem(
-            verseNumber: verseNumber,
-            verseArabic: verseArabic,
-            verseTransliteration: verseTransliteration,
-            verseTranslation: verseTranslationTranslated,
+          return InkWell(
+            onTap: () {
+              context.push(
+                '/surah/$surahNumber/$verseNumber',
+                extra: widget.surah,
+              );
+            },
+            borderRadius: BorderRadius.circular(defaultRadius),
+            child: Padding(
+              padding: EdgeInsets.all(defaultMargin),
+              child: VerseItem(
+                verseNumber: verseNumber,
+                verseArabic: verseArabic,
+                verseTransliteration: verseTransliteration,
+                verseTranslation: verseTranslationTranslated,
+              ),
+            ),
           );
         },
       ),

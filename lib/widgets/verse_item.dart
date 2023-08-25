@@ -8,12 +8,14 @@ class VerseItem extends StatelessWidget {
   final String? verseArabic;
   final String? verseTransliteration;
   final String? verseTranslation;
+  final String? tafsir;
   const VerseItem({
     super.key,
     this.verseNumber,
     this.verseArabic,
     this.verseTransliteration,
     this.verseTranslation,
+    this.tafsir,
   });
 
   @override
@@ -51,6 +53,26 @@ class VerseItem extends StatelessWidget {
           style: Theme.of(context).textTheme.labelMedium,
           textScaleFactor: 1.0,
         ),
+        tafsir != null
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: defaultMargin),
+                  Text(
+                    'Tafsir',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: bold,
+                        ),
+                    textScaleFactor: 1.0,
+                  ),
+                  SelectableText(
+                    tafsir ?? '',
+                    style: Theme.of(context).textTheme.labelMedium,
+                    textScaleFactor: 1.0,
+                  ),
+                ],
+              )
+            : Container(),
       ],
     );
   }
