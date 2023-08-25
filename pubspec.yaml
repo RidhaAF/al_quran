@@ -56,6 +56,17 @@ flutter_launcher_icons:
   adaptive_icon_foreground: "assets/icons/ic_app_white_432px.png"
   remove_alpha_ios: true
 
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: "assets/icons/ic_app_purple.png"
+  color_dark: "#7E57C2"
+  image_dark: "assets/icons/ic_app_white.png"
+  android_12:
+    color: "#FFFFFF"
+    icon_background_color: "#FFFFFF"
+    color_dark: "#7E57C2"
+    icon_background_color_dark: "#7E57C2"
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
