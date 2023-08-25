@@ -180,6 +180,7 @@ class _SurahPageState extends State<SurahPage> {
                 verseTransliteration: verseTransliteration,
                 verseTranslation: verseTranslationTranslated,
                 audio: audio,
+                isEnglish: isEnglish,
               ),
             ),
           );

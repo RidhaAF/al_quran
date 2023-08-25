@@ -10,16 +10,18 @@ class VerseItem extends StatefulWidget {
   final String? verseArabic;
   final String? verseTransliteration;
   final String? verseTranslation;
-  final String? tafsir;
   final String? audio;
+  final String? tafsir;
+  final bool? isEnglish;
   const VerseItem({
     super.key,
     this.verseNumber,
     this.verseArabic,
     this.verseTransliteration,
     this.verseTranslation,
-    this.tafsir,
     this.audio,
+    this.tafsir,
+    this.isEnglish = true,
   });
 
   @override
@@ -27,9 +29,15 @@ class VerseItem extends StatefulWidget {
 }
 
 class _VerseItemState extends State<VerseItem> {
+  bool isEnglish = true;
   late AudioPlayer? player;
   PlayerState playerState = PlayerState.stopped;
   bool isLoading = false;
+
+  void _getTranslation() {
+    isEnglish = widget.isEnglish ?? true;
+    setState(() {});
+  }
 
   void _handleAudio() async {
     DefaultAudioPlayerManager.instance.stopAllPlayersExcept(widget.verseNumber);
@@ -65,10 +73,14 @@ class _VerseItemState extends State<VerseItem> {
 
   @override
   Widget build(BuildContext context) {
+    _getTranslation();
     String arabicNumber = arabicNumberConverter(widget.verseNumber ?? '0');
+    String play = isEnglish ? 'Play' : 'Putar';
+    String stop = isEnglish ? 'Stop' : 'Berhenti';
+    String downloading = isEnglish ? 'Downloading' : 'Mengunduh';
     String audioTooltip = playerState == PlayerState.playing
-        ? 'Stop'
-        : (isLoading ? 'Downloading' : 'Play');
+        ? stop
+        : (isLoading ? downloading : play);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,11 +155,12 @@ class _VerseItemState extends State<VerseItem> {
   }
 
   Widget _loadingIndicator() {
-    return const SizedBox(
+    return SizedBox(
       width: 16,
       height: 16,
       child: CircularProgressIndicator(
-        strokeWidth: 3.0,
+        valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+        strokeWidth: 2.5,
       ),
     );
   }

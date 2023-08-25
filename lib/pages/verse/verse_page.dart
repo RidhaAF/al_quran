@@ -105,8 +105,9 @@ class _VersePageState extends State<VersePage> {
           verseArabic: verseArabic,
           verseTransliteration: verseTransliteration,
           verseTranslation: verseTranslationTranslated,
-          tafsir: tafsir,
           audio: audio,
+          tafsir: tafsir,
+          isEnglish: isEnglish,
         ),
       ),
     );
