@@ -68,7 +68,7 @@ class DefaultThemes {
       actionsIconTheme: IconThemeData(
         color: whiteColor,
       ),
-      titleTextStyle: TextStyle(
+      titleTextStyle: GoogleFonts.ibmPlexSansArabic(
         fontSize: bodyFS,
         fontWeight: semiBold,
       ),
