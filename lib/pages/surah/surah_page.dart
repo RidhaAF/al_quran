@@ -164,7 +164,10 @@ class _SurahPageState extends State<SurahPage> {
             onTap: () {
               context.push(
                 '/surah/$surahNumber/$verseNumber',
-                extra: widget.surah,
+                extra: {
+                  'surah': widget.surah,
+                  'verse': verse,
+                },
               );
             },
             borderRadius: BorderRadius.circular(defaultRadius),
