@@ -47,6 +47,9 @@ class DefaultListTile extends StatelessWidget {
       splashColor: primaryColor.withOpacity(0.2),
       dense: true,
       contentPadding: EdgeInsets.symmetric(horizontal: defaultMargin / 2),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(defaultRadius),
+      ),
     );
   }
 }

@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   adaptive_theme: ^3.3.0
+  audioplayers: ^5.1.0
   bloc: ^8.1.2
   cupertino_icons: ^1.0.2
   dio: ^5.3.2
