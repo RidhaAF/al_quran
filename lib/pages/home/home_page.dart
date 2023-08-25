@@ -1,4 +1,5 @@
 import 'package:al_quran/cubits/translate/translate_cubit.dart';
+import 'package:al_quran/widgets/default_404.dart';
 import 'package:al_quran/widgets/default_app_bar.dart';
 import 'package:al_quran/widgets/default_list_tile.dart';
 import 'package:al_quran/widgets/default_refresh_indicator.dart';
@@ -6,6 +7,7 @@ import 'package:al_quran/cubits/surah/surah_cubit.dart';
 import 'package:al_quran/models/surah_model.dart';
 import 'package:al_quran/utilities/constants.dart';
 import 'package:al_quran/utilities/functions.dart';
+import 'package:al_quran/widgets/default_search_bar.dart';
 import 'package:al_quran/widgets/default_shimmer.dart';
 import 'package:al_quran/widgets/translate_icon_button.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isEnglish = true;
+  final TextEditingController _searchCtrl = TextEditingController();
+  final FocusNode _searchFocus = FocusNode();
+  List<Surah>? _surahs = [];
+  List<Surah>? _filteredSurahs = [];
 
   Future<void> _onRefresh() async {
     await Future.delayed(const Duration(seconds: 1));
@@ -44,10 +50,43 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
+  void _searchSurah(String query) {
+    setState(() {
+      _surahs = context.read<SurahCubit>().getSurahsData();
+      if (query.isEmpty) {
+        _filteredSurahs = _surahs;
+      } else {
+        _filteredSurahs = _surahs?.where((surah) {
+          final translitEn =
+              surah.name?.transliteration?.en?.toLowerCase() ?? "";
+          final translitId =
+              surah.name?.transliteration?.id?.toLowerCase() ?? "";
+          final lowercaseQuery = query.toLowerCase();
+
+          return translitEn.contains(lowercaseQuery) ||
+              translitId.contains(lowercaseQuery);
+        }).toList();
+      }
+    });
+  }
+
+  void _clearSearch() {
+    setState(() {
+      _searchCtrl.clear();
+      _filteredSurahs = _surahs;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _getTranslation();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _searchCtrl.dispose();
   }
 
   @override
@@ -85,11 +124,33 @@ class _HomePageState extends State<HomePage> {
       ),
       body: DefaultRefreshIndicator(
         onRefresh: _onRefresh,
-        child: ListView(
+        child: Column(
           children: [
-            _listSurah(),
+            _searchBar(),
+            Expanded(
+              child: ListView(
+                children: [
+                  _listSurah(),
+                ],
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _searchBar() {
+    String hintText = isEnglish ? 'Search surah...' : 'Cari surat...';
+
+    return Padding(
+      padding: EdgeInsets.all(defaultMargin),
+      child: DefaultSearchBar(
+        controller: _searchCtrl,
+        focusNode: _searchFocus,
+        hintText: hintText,
+        onChanged: (value) => _searchSurah(value),
+        onPressed: _clearSearch,
       ),
     );
   }
@@ -103,16 +164,20 @@ class _HomePageState extends State<HomePage> {
           return listViewSeparatedShimmer();
         } else if (state is SurahLoaded) {
           List<Surah>? surahs = state.surahModel.data;
+          _surahs = _searchCtrl.text.isNotEmpty ? _filteredSurahs : surahs;
 
+          if (_surahs!.isEmpty) {
+            return const Default404();
+          }
           return Padding(
             padding: EdgeInsets.all(defaultMargin),
             child: ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: surahs?.length ?? 0,
+              itemCount: _surahs?.length ?? 0,
               separatorBuilder: (context, i) => const Divider(height: 0),
               itemBuilder: (context, i) {
-                Surah? surah = surahs?[i];
+                Surah? surah = _surahs?[i];
                 String? surahNumber = surah?.number?.toString() ?? '';
                 String? surahNameEn = surah?.name?.transliteration?.en ?? '';
                 String? surahNameId = surah?.name?.transliteration?.id ?? '';
@@ -148,7 +213,7 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         }
-        return Container();
+        return const Default404();
       },
     );
   }

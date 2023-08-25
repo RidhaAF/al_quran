@@ -37,6 +37,39 @@ class DefaultThemes {
         fontWeight: semiBold,
       ),
     ),
+    searchBarTheme: SearchBarThemeData(
+      elevation: MaterialStateProperty.all(0),
+      backgroundColor: MaterialStateProperty.all(
+        primaryColor.withOpacity(0.1),
+      ),
+      shape: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.focused)) {
+          return RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(defaultRadius),
+            ),
+            side: BorderSide(color: primaryColor),
+          );
+        }
+        return RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(defaultRadius),
+          ),
+          side: BorderSide.none,
+        );
+      }),
+      hintStyle: MaterialStateProperty.all(
+        GoogleFonts.ibmPlexSansArabic(
+          color: greyColor,
+          fontSize: calloutFS,
+        ),
+      ),
+      textStyle: MaterialStateProperty.all(
+        GoogleFonts.ibmPlexSansArabic(
+          fontSize: calloutFS,
+        ),
+      ),
+    ),
   );
 
   ThemeData dark = ThemeData(
@@ -71,6 +104,39 @@ class DefaultThemes {
       titleTextStyle: GoogleFonts.ibmPlexSansArabic(
         fontSize: bodyFS,
         fontWeight: semiBold,
+      ),
+    ),
+    searchBarTheme: SearchBarThemeData(
+      elevation: MaterialStateProperty.all(0),
+      backgroundColor: MaterialStateProperty.all(
+        primaryColor.withOpacity(0.1),
+      ),
+      shape: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.focused)) {
+          return RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(defaultRadius),
+            ),
+            side: BorderSide(color: primaryColor),
+          );
+        }
+        return RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(defaultRadius),
+          ),
+          side: BorderSide.none,
+        );
+      }),
+      hintStyle: MaterialStateProperty.all(
+        GoogleFonts.ibmPlexSansArabic(
+          color: mutedColor,
+          fontSize: calloutFS,
+        ),
+      ),
+      textStyle: MaterialStateProperty.all(
+        GoogleFonts.ibmPlexSansArabic(
+          fontSize: calloutFS,
+        ),
       ),
     ),
   );
