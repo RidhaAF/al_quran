@@ -90,6 +90,7 @@ class _VersePageState extends State<VersePage> {
     String? verseTranslationTranslated =
         isEnglish ? verseTranslationEn : verseTranslationId;
     String? tafsir = widget.verse?.tafsir?.id?.long ?? '';
+    String? audio = widget.verse?.audio?.primary ?? '';
 
     return Container(
       margin: EdgeInsets.all(defaultMargin),
@@ -105,6 +106,7 @@ class _VersePageState extends State<VersePage> {
           verseTransliteration: verseTransliteration,
           verseTranslation: verseTranslationTranslated,
           tafsir: tafsir,
+          audio: audio,
         ),
       ),
     );

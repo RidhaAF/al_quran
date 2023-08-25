@@ -159,6 +159,7 @@ class _SurahPageState extends State<SurahPage> {
           String? verseTranslationId = verse?.translation?.id ?? '';
           String? verseTranslationTranslated =
               isEnglish ? verseTranslationEn : verseTranslationId;
+          String? audio = verse?.audio?.primary ?? '';
 
           return InkWell(
             onTap: () {
@@ -178,6 +179,7 @@ class _SurahPageState extends State<SurahPage> {
                 verseArabic: verseArabic,
                 verseTransliteration: verseTransliteration,
                 verseTranslation: verseTranslationTranslated,
+                audio: audio,
               ),
             ),
           );
