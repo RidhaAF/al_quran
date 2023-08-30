@@ -1,16 +1,26 @@
-# al_quran
+# Al-Quran
 
-A new Flutter project.
+Al-Quran App.
 
-## Getting Started
+## Packages
 
-This project is a starting point for a Flutter application.
+You can see the packages used in this project in the file [pubspec.yaml](pubspec.yaml).
 
-A few resources to get you started if this is your first Flutter project:
+## Installation and Usage
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+To try the app, you can clone this repository and run it on your local machine:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+$ git clone https://github.com/RidhaAF/al_quran.git
+$ cd al_quran
+```
+
+Get all the dependencies:
+
+```
+$ flutter pub get
+```
+
+## Download
+
+[![Get it on Play Store](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=com.ridhaaf.al_quran)
