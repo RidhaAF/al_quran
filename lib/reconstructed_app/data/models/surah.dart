@@ -4,20 +4,6 @@ part 'surah.freezed.dart';
 part 'surah.g.dart';
 
 @freezed
-class SurahModel with _$SurahModel {
-  @JsonSerializable(explicitToJson: true)
-  const factory SurahModel({
-    int? code,
-    String? status,
-    String? message,
-    List<Surah>? data,
-  }) = _SurahModel;
-
-  factory SurahModel.fromJson(Map<String, dynamic> json) =>
-      _$SurahModelFromJson(json);
-}
-
-@freezed
 class Surah with _$Surah {
   @JsonSerializable(explicitToJson: true)
   const factory Surah({

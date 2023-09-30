@@ -6,24 +6,6 @@ part of 'surah.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SurahModel _$$_SurahModelFromJson(Map<String, dynamic> json) =>
-    _$_SurahModel(
-      code: json['code'] as int?,
-      status: json['status'] as String?,
-      message: json['message'] as String?,
-      data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Surah.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$$_SurahModelToJson(_$_SurahModel instance) =>
-    <String, dynamic>{
-      'code': instance.code,
-      'status': instance.status,
-      'message': instance.message,
-      'data': instance.data?.map((e) => e.toJson()).toList(),
-    };
-
 _$_Surah _$$_SurahFromJson(Map<String, dynamic> json) => _$_Surah(
       number: json['number'] as int?,
       sequence: json['sequence'] as int?,
