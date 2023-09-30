@@ -3,11 +3,8 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 
 import '../../core/core.dart';
+import '../../domain/domain.dart';
 import '../data.dart';
-
-abstract class SurahRepository {
-  Future<Either<Failure, List<Surah>>> getSurahs();
-}
 
 class SurahRepositoryImpl implements SurahRepository {
   final SurahProvider surahProvider;

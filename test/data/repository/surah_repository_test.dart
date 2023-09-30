@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:al_quran/reconstructed_app/core/core.dart';
 import 'package:al_quran/reconstructed_app/data/data.dart';
+import 'package:al_quran/reconstructed_app/domain/domain.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
