@@ -48,6 +48,7 @@ dependencies:
   shimmer: ^3.0.0
 
 dev_dependencies:
+  bloc_test: ^9.1.4
   build_runner: ^2.4.6
   flutter_lints: ^2.0.0
   flutter_test:
