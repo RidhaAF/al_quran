@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:logging/logging.dart';
 
 import '../../core/core.dart';
 import '../../domain/domain.dart';
@@ -11,8 +12,11 @@ class SurahRepositoryImpl implements SurahRepository {
 
   SurahRepositoryImpl({required this.surahProvider});
 
+  final Logger log = Logger("Surah Repository");
+
   @override
   Future<Either<Failure, List<Surah>>> getSurahs() async {
+    log.fine('getSurahs()');
     try {
       final result = await surahProvider.getSurahs();
       return Right(result.map((surah) => surah.copyWith()).toList());

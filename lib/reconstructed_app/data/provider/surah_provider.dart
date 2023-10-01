@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:logging/logging.dart';
 
 import '../../core/core.dart';
 import '../data.dart';
@@ -12,8 +13,11 @@ class SurahProviderImpl implements SurahProvider {
 
   SurahProviderImpl({required this.dio});
 
+  final Logger log = Logger("Surah Provider");
+
   @override
   Future<List<Surah>> getSurahs() async {
+    log.fine('getSurahs');
     Response res = await dio.get(ApiPath.surah);
     if (res.statusCode == 200) {
       final List<dynamic> data = res.data['data'];

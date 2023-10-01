@@ -12,7 +12,7 @@ class SurahCubit extends Cubit<SurahState> {
 
   SurahCubit({required this.surahUsecase}) : super(const SurahState.initial());
 
-  Future<void> fetch() async {
+  void fetch() async {
     emit(const SurahState.loading());
     final surah = await surahUsecase.call();
     surah.fold(

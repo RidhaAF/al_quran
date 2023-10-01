@@ -1,16 +1,18 @@
 import 'package:go_router/go_router.dart';
 
+import '../../presentation/presentation.dart';
+
 abstract class Routes {
   static GoRouter get defaultRouter {
     return GoRouter(
       initialLocation: '/',
       routes: [
-        /*
         GoRoute(
           name: 'home',
           path: '/',
           builder: (context, state) => const HomePage(),
         ),
+        /*
         GoRoute(
           name: 'surah',
           path: '/surah/:surahNumber',
