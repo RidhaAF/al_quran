@@ -12,6 +12,7 @@ export 'mock.mocks.dart';
   MockSpec<GetStorage>(),
   // Data
   MockSpec<SurahProvider>(),
+  MockSpec<SurahDetailProvider>(),
   MockSpec<SurahRepository>(),
 
   // Domain
