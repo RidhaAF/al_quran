@@ -30,7 +30,7 @@ void main() {
         name: Name(
           short: "الفاتحة",
           long: "سُورَةُ ٱلْفَاتِحَةِ",
-          transliteration: Transliteration(
+          transliteration: Translation(
             en: "Al-Faatiha",
             id: "Al-Fatihah",
           ),
@@ -57,7 +57,7 @@ void main() {
         name: Name(
           short: "الفاتحة",
           long: "سُورَةُ ٱلْفَاتِحَةِ",
-          transliteration: Transliteration(
+          transliteration: Translation(
             en: "Al-Faatiha",
             id: "Al-Fatihah",
           ),
@@ -106,7 +106,7 @@ void main() {
       final matcher = Name(
         short: "الفاتحة",
         long: "سُورَةُ ٱلْفَاتِحَةِ",
-        transliteration: Transliteration(
+        transliteration: Translation(
           en: "Al-Faatiha",
           id: "Al-Fatihah",
         ),
@@ -120,7 +120,7 @@ void main() {
       final actual = Name(
         short: "الفاتحة",
         long: "سُورَةُ ٱلْفَاتِحَةِ",
-        transliteration: Transliteration(
+        transliteration: Translation(
           en: "Al-Faatiha",
           id: "Al-Fatihah",
         ),
@@ -142,15 +142,15 @@ void main() {
         const {"en": "Al-Faatiha", "id": "Al-Fatihah"},
       );
 
-      final matcher = Transliteration(en: "Al-Faatiha", id: "Al-Fatihah");
+      final matcher = Transliteration(en: "Al-Faatiha");
 
       expect(actual, matcher);
     });
 
     test('.toJson', () {
-      final actual = Transliteration(en: "Al-Faatiha", id: "Al-Fatihah");
+      final actual = Transliteration(en: "Al-Faatiha");
 
-      expect(actual.toJson(), {"en": "Al-Faatiha", "id": "Al-Fatihah"});
+      expect(actual.toJson(), {"en": "Al-Faatiha"});
     });
   });
 
