@@ -1,7 +1,9 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
-abstract class Functions {
+import '../core.dart';
+
+abstract class CustomFunctions {
   bool isDarkMode(BuildContext context);
 
   Color getContainerColor(BuildContext context);
@@ -9,7 +11,7 @@ abstract class Functions {
   String arabicNumberConverter(String number);
 }
 
-class FunctionsImpl implements Functions {
+class CustomFunctionsImpl implements CustomFunctions {
   @override
   String arabicNumberConverter(String number) {
     String res = '';
@@ -23,10 +25,9 @@ class FunctionsImpl implements Functions {
   }
 
   @override
-  Color getContainerColor(BuildContext context) {
-    // TODO: implement getContainerColor
-    throw UnimplementedError();
-  }
+  Color getContainerColor(BuildContext context) => isDarkMode(context)
+      ? DefaultStyle.bgColorDark3
+      : DefaultStyle.bgColorLight3;
 
   @override
   bool isDarkMode(BuildContext context) =>

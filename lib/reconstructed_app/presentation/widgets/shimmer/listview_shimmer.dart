@@ -61,7 +61,7 @@ class ShimmerBox extends StatelessWidget {
     this.borderRadius,
   });
 
-  final Functions func = di<Functions>();
+  final CustomFunctions func = di<CustomFunctions>();
 
   @override
   Widget build(BuildContext context) {

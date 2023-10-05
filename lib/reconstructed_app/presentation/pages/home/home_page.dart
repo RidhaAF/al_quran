@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/core.dart';
-import '../../../data/data.dart';
+import '../../../data/data.dart' hide Text;
 import '../../../injection.dart';
 import '../../presentation.dart';
 
@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isEnglish = true;
   final TextEditingController _searchCtrl = TextEditingController();
-  final Functions func = di<Functions>();
+  final CustomFunctions func = di<CustomFunctions>();
 
   void _getTranslation() {
     isEnglish = context.read<TranslateCubit>().getTranslation();
@@ -53,7 +53,6 @@ class _HomePageState extends State<HomePage> {
                 isEnglish = context.read<TranslateCubit>().setTranslation();
                 setState(() {});
               },
-              iconColor: DefaultStyle.primaryColor,
             ),
           ),
         ],

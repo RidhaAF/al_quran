@@ -26,7 +26,7 @@ Future<void> injectionInit() async {
   di.registerFactory<GetStorage>(() => GetStorage());
   di.registerSingleton<WidgetsBinding>(WidgetsBinding.instance);
 
-  di.registerSingleton<Functions>(FunctionsImpl());
+  di.registerSingleton<CustomFunctions>(CustomFunctionsImpl());
 
   /*---------------------- data ----------------------*/
   di.registerFactory<SurahProvider>(() => SurahProviderImpl(dio: di<Dio>()));

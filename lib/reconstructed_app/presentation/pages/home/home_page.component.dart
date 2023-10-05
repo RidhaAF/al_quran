@@ -3,12 +3,10 @@ part of 'home_page.dart';
 class TranslateIconButton extends StatelessWidget {
   final bool isEnglish;
   final Function() onPressed;
-  final Color? iconColor;
   const TranslateIconButton({
     super.key,
     required this.isEnglish,
     required this.onPressed,
-    this.iconColor,
   });
 
   @override
@@ -21,7 +19,7 @@ class TranslateIconButton extends StatelessWidget {
       onPressed: onPressed,
       icon: Icon(
         Icons.translate_rounded,
-        color: iconColor,
+        color: DefaultStyle.primaryColor,
       ),
       highlightColor: DefaultStyle.mutedColor.withOpacity(0.3),
       tooltip: tooltip,
@@ -53,8 +51,10 @@ class _SearchBarState extends State<SearchBar> {
         _filteredSurahs = _surahs;
       } else {
         _filteredSurahs = _surahs.where((surah) {
-          final translitEn = surah.name?.transliteration.en.toLowerCase() ?? "";
-          final translitId = surah.name?.transliteration.id.toLowerCase() ?? "";
+          final translitEn =
+              surah.name?.transliteration.en?.toLowerCase() ?? "";
+          final translitId =
+              surah.name?.transliteration.id?.toLowerCase() ?? "";
           final lowercaseQuery = query.toLowerCase();
 
           return translitEn.contains(lowercaseQuery) ||
