@@ -30,18 +30,26 @@ Future<void> injectionInit() async {
 
   /*---------------------- data ----------------------*/
   di.registerFactory<SurahProvider>(() => SurahProviderImpl(dio: di<Dio>()));
+  di.registerFactory<SurahDetailProvider>(
+      () => SurahDetailProviderImpl(dio: di<Dio>()));
 
   /*---------------------- domain repository ----------------------*/
   di.registerLazySingleton<SurahRepository>(
     () => SurahRepositoryImpl(surahProvider: di<SurahProvider>()),
   );
+  di.registerLazySingleton<SurahDetailRepository>(() =>
+      SurahDetailRepositoryImpl(
+          surahDetailProvider: di<SurahDetailProvider>()));
 
   /*---------------------- domain usecase ----------------------*/
   di.registerLazySingleton(
     () => SurahUsecase(surahRepository: di<SurahRepository>()),
   );
+  di.registerLazySingleton(() =>
+      SurahDetailUsecase(surahDetailRepository: di<SurahDetailRepository>()));
 
   /*---------------------- presentation cubit ----------------------*/
   di.registerFactory(() => SurahCubit(surahUsecase: di<SurahUsecase>()));
+  di.registerFactory(() => SurahDetailCubit(di<SurahDetailUsecase>()));
   di.registerFactory(() => TranslateCubit(box: di<GetStorage>()));
 }

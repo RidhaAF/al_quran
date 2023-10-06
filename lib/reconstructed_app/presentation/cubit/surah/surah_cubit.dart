@@ -11,9 +11,7 @@ class SurahCubit extends Cubit<SurahState> {
   final SurahUsecase surahUsecase;
   late List<Surah>? surahs;
 
-  SurahCubit({required this.surahUsecase}) : super(const SurahState.initial()) {
-    fetch();
-  }
+  SurahCubit({required this.surahUsecase}) : super(const SurahState.initial());
 
   void fetch() async {
     emit(const SurahState.loading());

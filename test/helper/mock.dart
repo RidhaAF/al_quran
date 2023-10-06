@@ -22,5 +22,7 @@ export 'mock.mocks.dart';
 
   // Presentation
   MockSpec<SurahCubit>(),
+  MockSpec<SurahDetailCubit>(),
+  MockSpec<TranslateCubit>(),
 ])
 void main(List<String> args) {}
