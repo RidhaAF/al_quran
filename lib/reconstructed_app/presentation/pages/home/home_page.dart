@@ -7,10 +7,8 @@ import '../../../data/data.dart' hide Text;
 import '../../../injection.dart';
 import '../../presentation.dart';
 
-part 'home_page.component.dart';
-
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -19,11 +17,56 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isEnglish = true;
   final TextEditingController _searchCtrl = TextEditingController();
+  final FocusNode _searchFocus = FocusNode();
   final CustomFunctions func = di<CustomFunctions>();
+  List<Surah>? _surahs = [];
+  List<Surah>? _filteredSurahs = [];
+
+  Future<void> _onRefresh() async {
+    await Future.delayed(const Duration(seconds: 1));
+    if (mounted) {
+      _getData();
+      setState(() {});
+    }
+  }
+
+  _getData() {
+    context.read<SurahCubit>().fetch();
+  }
 
   void _getTranslation() {
     isEnglish = context.read<TranslateCubit>().getTranslation();
     setState(() {});
+  }
+
+  void _handleTranslation() {
+    isEnglish = context.read<TranslateCubit>().setTranslation();
+    setState(() {});
+  }
+
+  void _searchSurah(String query) {
+    setState(() {
+      _surahs = context.read<SurahCubit>().getSurah();
+      if (query.isEmpty) {
+        _filteredSurahs = _surahs;
+      } else {
+        _filteredSurahs = _surahs?.where((surah) {
+          final translitEn = surah.name?.transliteration.en?.toLowerCase();
+          final translitId = surah.name?.transliteration.id?.toLowerCase();
+          final lowercaseQuery = query.toLowerCase();
+
+          return translitEn!.contains(lowercaseQuery) ||
+              translitId!.contains(lowercaseQuery);
+        }).toList();
+      }
+    });
+  }
+
+  void _clearSearch() {
+    setState(() {
+      _searchCtrl.clear();
+      _filteredSurahs = _surahs;
+    });
   }
 
   @override
@@ -50,8 +93,7 @@ class _HomePageState extends State<HomePage> {
             child: TranslateIconButton(
               isEnglish: isEnglish,
               onPressed: () {
-                isEnglish = context.read<TranslateCubit>().setTranslation();
-                setState(() {});
+                _handleTranslation();
               },
             ),
           ),
@@ -66,22 +108,80 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          SearchBar(
-            searchCtrl: _searchCtrl,
-            hintText: isEnglish ? 'Search surah...' : 'Cari surat...',
-          ),
+          _searchBar(),
           Expanded(
             child: ListView(
-              children: [
-                _ListSurah(
-                  _searchCtrl,
-                  isEnglish,
-                ),
-              ],
+              children: [_listSurah()],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _searchBar() {
+    String hintText = isEnglish ? 'Search surah...' : 'Cari surat...';
+
+    return Padding(
+      padding: EdgeInsets.all(DefaultStyle.defaultMargin),
+      child: DefaultSearchBar(
+        controller: _searchCtrl,
+        focusNode: _searchFocus,
+        hintText: hintText,
+        onChanged: (value) => _searchSurah(value),
+        onPressed: _clearSearch,
+      ),
+    );
+  }
+
+  Widget _listSurah() {
+    return BlocBuilder<SurahCubit, SurahState>(
+      builder: (context, state) {
+        return state.when(
+          initial: () => const Center(
+            child: Text('no data'),
+          ),
+          loading: () => const ListViewShimmer(),
+          loaded: (surah) {
+            List<Surah> surahs = surah;
+
+            _surahs = _searchCtrl.text.isNotEmpty ? _filteredSurahs : surahs;
+
+            if (_surahs!.isEmpty) return const Center(child: Text('empty'));
+
+            return DefaultRefreshIndicator(
+              onRefresh: _onRefresh,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: DefaultStyle.defaultMargin,
+                ),
+                child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: _surahs?.length ?? 0,
+                  separatorBuilder: (context, index) =>
+                      const Divider(height: 0),
+                  itemBuilder: (context, index) {
+                    SurahVariable surahVar = SurahVariable(
+                      _surahs?[index],
+                      isEnglish,
+                    );
+
+                    return DefaultListTile(
+                      leading: surahVar.surahNumber,
+                      title: surahVar.surahNameTranslated,
+                      subtitle: surahVar.surahSubtitle,
+                      trailing: surahVar.surahNameArabic,
+                      onTap: () {},
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+          error: (message) => const SizedBox(),
+        );
+      },
     );
   }
 }

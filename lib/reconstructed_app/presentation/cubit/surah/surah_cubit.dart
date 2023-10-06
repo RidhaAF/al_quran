@@ -9,15 +9,25 @@ part 'surah_state.dart';
 
 class SurahCubit extends Cubit<SurahState> {
   final SurahUsecase surahUsecase;
+  late List<Surah>? surahs;
 
-  SurahCubit({required this.surahUsecase}) : super(const SurahState.initial());
+  SurahCubit({required this.surahUsecase}) : super(const SurahState.initial()) {
+    fetch();
+  }
 
   void fetch() async {
     emit(const SurahState.loading());
     final surah = await surahUsecase.call();
     surah.fold(
       (fail) => emit(SurahState.error(fail.message)),
-      (success) => emit(SurahState.loaded(success)),
+      (success) {
+        surahs = success;
+        emit(SurahState.loaded(success));
+      },
     );
+  }
+
+  getSurah() {
+    return surahs ?? [];
   }
 }
