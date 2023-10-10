@@ -13,6 +13,7 @@ export 'mock.mocks.dart';
   // Data
   MockSpec<SurahProvider>(),
   MockSpec<SurahDetailProvider>(),
+  MockSpec<VerseProvider>(),
   MockSpec<SurahRepository>(),
   MockSpec<SurahDetailRepository>(),
 

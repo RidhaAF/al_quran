@@ -22,51 +22,54 @@ void main() {
           requestOptions: RequestOptions(path: ""),
           statusCode: 200,
           data: {
-            "number": 1,
-            "sequence": 5,
-            "numberOfVerses": 7,
-            "name": {
-              "short": "الفاتحة",
-              "long": "سُورَةُ ٱلْفَاتِحَةِ",
-              "transliteration": {"en": "Al-Faatiha", "id": "Al-Fatihah"},
-              "translation": {"en": "The Opening", "id": "Pembukaan"}
-            },
-            "revelation": {"arab": "مكة", "en": "Meccan", "id": "Makkiyyah"},
-            "tafsir": {"id": "Surat Al Faatihah .."},
-            "preBismillah": null,
-            "verses": [
-              {
-                "number": {"inQuran": 1, "inSurah": 1},
-                "meta": {
-                  "juz": 1,
-                  "page": 1,
-                  "manzil": 1,
-                  "ruku": 1,
-                  "hizbQuarter": 1,
-                  "sajda": {"recommended": false, "obligatory": false}
-                },
-                "text": {
-                  "arab": "﻿بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-                  "transliteration": {"en": "Bismillaahir Rahmaanir Raheem"}
-                },
-                "translation": {
-                  "en":
-                      "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
-                  "id": "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang."
-                },
-                "audio": {
-                  "primary":
-                      "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/1",
-                  "secondary": [
-                    "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
-                    "https://cdn.islamic.network/quran/audio/64/ar.alafasy/1.mp3"
-                  ]
-                },
-                "tafsir": {
-                  "id": {"short": "short", "long": "long"}
-                }
+            "data": {
+              "number": 1,
+              "sequence": 5,
+              "numberOfVerses": 7,
+              "name": {
+                "short": "الفاتحة",
+                "long": "سُورَةُ ٱلْفَاتِحَةِ",
+                "transliteration": {"en": "Al-Faatiha", "id": "Al-Fatihah"},
+                "translation": {"en": "The Opening", "id": "Pembukaan"}
               },
-            ]
+              "revelation": {"arab": "مكة", "en": "Meccan", "id": "Makkiyyah"},
+              "tafsir": {"id": "Surat Al Faatihah .."},
+              "preBismillah": null,
+              "verses": [
+                {
+                  "number": {"inQuran": 1, "inSurah": 1},
+                  "meta": {
+                    "juz": 1,
+                    "page": 1,
+                    "manzil": 1,
+                    "ruku": 1,
+                    "hizbQuarter": 1,
+                    "sajda": {"recommended": false, "obligatory": false}
+                  },
+                  "text": {
+                    "arab": "﻿بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+                    "transliteration": {"en": "Bismillaahir Rahmaanir Raheem"}
+                  },
+                  "translation": {
+                    "en":
+                        "In the name of Allah, the Entirely Merciful, the Especially Merciful.",
+                    "id":
+                        "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang."
+                  },
+                  "audio": {
+                    "primary":
+                        "https://cdn.alquran.cloud/media/audio/ayah/ar.alafasy/1",
+                    "secondary": [
+                      "https://cdn.islamic.network/quran/audio/128/ar.alafasy/1.mp3",
+                      "https://cdn.islamic.network/quran/audio/64/ar.alafasy/1.mp3"
+                    ]
+                  },
+                  "tafsir": {
+                    "id": {"short": "short", "long": "long"}
+                  }
+                },
+              ]
+            }
           });
 
       when(mockDio.get('${ApiPath.surah}/$surahNumber',
