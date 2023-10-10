@@ -30,6 +30,7 @@ class _DefaultScaffoldState extends State<DefaultScaffold> {
 
   _getTranslation() {
     isEnglish = context.read<TranslateCubit>().getTranslation();
+    setState(() {});
   }
 
   _handleTranslation() {
@@ -45,6 +46,7 @@ class _DefaultScaffoldState extends State<DefaultScaffold> {
 
   @override
   Widget build(BuildContext context) {
+    isEnglish = widget.isEnglish;
     return Scaffold(
       appBar: DefaultAppBar(
         title: widget.title,

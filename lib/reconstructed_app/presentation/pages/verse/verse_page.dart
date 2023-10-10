@@ -15,7 +15,7 @@ class VersePage extends StatefulWidget {
   final Surah? surah;
   final Verse? verse;
   final int? surahNumber;
-  final String? verseNumber;
+  final int? verseNumber;
 
   @override
   State<VersePage> createState() => _VersePageState();

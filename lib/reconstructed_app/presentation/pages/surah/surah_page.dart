@@ -57,6 +57,7 @@ class _SurahPageState extends State<SurahPage> {
 
     var surah = SurahVariable(widget.surah, isEnglish);
     return DefaultScaffold(
+      isEnglish: isEnglish,
       title: '${surah.surahNumber}. ${surah.surahNameTranslated}',
       subtitle: surah.surahNameTranslationTranslated,
       body: DefaultRefreshIndicator(

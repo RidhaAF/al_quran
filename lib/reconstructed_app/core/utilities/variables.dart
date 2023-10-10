@@ -30,7 +30,7 @@ class VerseVariable {
 
   VerseVariable({required this.verse, required this.isEnglish});
 
-  String? get verseNumber => verse?.number?.inSurah?.toString() ?? '';
+  int? get verseNumber => verse?.number?.inSurah ?? 0;
   String? get verseArabic => verse?.text?.arab ?? '';
   String? get verseTransliteration => verse?.text?.transliteration?.en ?? '';
   String? get verseTranslationEn => verse?.translation?.en ?? '';

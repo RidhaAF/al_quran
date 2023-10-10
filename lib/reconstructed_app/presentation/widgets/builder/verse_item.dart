@@ -18,7 +18,7 @@ class VerseItem extends StatefulWidget {
     this.isEnglish = true,
   });
 
-  final String? verseNumber;
+  final int? verseNumber;
   final String? verseArabic;
   final String? verseTransliteration;
   final String? verseTranslation;
@@ -43,7 +43,8 @@ class _VerseItemState extends State<VerseItem> {
   }
 
   void _handleAudio() async {
-    DefaultAudioPlayerManager.instance.stopAllPlayersExcept(widget.verseNumber);
+    DefaultAudioPlayerManager.instance
+        .stopAllPlayersExcept(widget.verseNumber.toString());
 
     setState(() => isLoading = true);
     if (playerState == PlayerState.playing) {
@@ -57,9 +58,26 @@ class _VerseItemState extends State<VerseItem> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    player = DefaultAudioPlayerManager.instance
+        .playerForVerse(widget.verseNumber.toString());
+    player?.onPlayerStateChanged.listen((PlayerState s) {
+      if (mounted) setState(() => playerState = s);
+    });
+  }
+
+  @override
+  void dispose() {
+    DefaultAudioPlayerManager.instance.stopAllPlayers();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     _getTranslation();
-    String arabicNumber = func.arabicNumberConverter(widget.verseNumber ?? '0');
+    String arabicNumber =
+        func.arabicNumberConverter((widget.verseNumber ?? 0).toString());
     String play = isEnglish ? 'Play' : 'Putar';
     String stop = isEnglish ? 'Stop' : 'Berhenti';
     String downloading = isEnglish ? 'Downloading' : 'Mengunduh';
