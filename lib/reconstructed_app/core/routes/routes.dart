@@ -18,7 +18,7 @@ abstract class Routes {
           path: '/surah/:surahNumber',
           builder: (context, state) {
             final surahNumber =
-                int.parse(state.pathParameters['surahNumber'].toString());
+                int.tryParse(state.pathParameters['surahNumber'].toString());
             final Surah? surah = state.extra as Surah?;
             return SurahPage(
               surahNumber: surahNumber,
@@ -36,7 +36,8 @@ abstract class Routes {
                 (state.extra as Map<String, Object?>)['verse'] as Verse?;
             final surahNumber =
                 int.tryParse(state.pathParameters['surahNumber'].toString());
-            final verseNumber = state.pathParameters['verseNumber'];
+            final verseNumber =
+                int.tryParse(state.pathParameters['verseNumber'].toString());
 
             return VersePage(
               surah: surah,
