@@ -20,7 +20,7 @@ class SurahDetailProviderImpl implements SurahDetailProvider {
     log.fine('get surah detail');
     Response res = await dio.get('${ApiPath.surah}/$surahNumber');
     if (res.statusCode == 200) {
-      final data = res.data;
+      final data = res.data['data'];
       return SurahDetail.fromJson(data);
     } else {
       throw Exception();

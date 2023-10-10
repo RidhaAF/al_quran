@@ -12,13 +12,15 @@ class ReconstructedApp extends StatelessWidget {
 
   final SurahCubit surahCubit = di<SurahCubit>();
   final TranslateCubit translateCubit = di<TranslateCubit>();
+  final SurahDetailCubit surahDetailCubit = di<SurahDetailCubit>();
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => surahCubit),
-        BlocProvider(create: (context) => translateCubit)
+        BlocProvider(create: (context) => translateCubit),
+        BlocProvider(create: (context) => surahDetailCubit)
       ],
       child: AdaptiveTheme(
         light: DefaultThemes.light,

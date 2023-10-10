@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 
+import '../../data/data.dart';
 import '../../presentation/presentation.dart';
 
 abstract class Routes {
@@ -12,12 +13,12 @@ abstract class Routes {
           path: '/',
           builder: (context, state) => const HomePage(),
         ),
-        /*
         GoRoute(
           name: 'surah',
           path: '/surah/:surahNumber',
           builder: (context, state) {
-            final surahNumber = state.pathParameters['surahNumber'];
+            final surahNumber =
+                int.parse(state.pathParameters['surahNumber'].toString());
             final Surah? surah = state.extra as Surah?;
             return SurahPage(
               surahNumber: surahNumber,
@@ -33,7 +34,8 @@ abstract class Routes {
                 (state.extra as Map<String, Object?>)['surah'] as Surah?;
             final Verse? verse =
                 (state.extra as Map<String, Object?>)['verse'] as Verse?;
-            final surahNumber = state.pathParameters['surahNumber'];
+            final surahNumber =
+                int.tryParse(state.pathParameters['surahNumber'].toString());
             final verseNumber = state.pathParameters['verseNumber'];
 
             return VersePage(
@@ -44,7 +46,6 @@ abstract class Routes {
             );
           },
         ),
-        */
       ],
     );
   }

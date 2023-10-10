@@ -1,6 +1,6 @@
-import 'package:al_quran/app/widgets/default_refresh_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/core.dart';
 import '../../../data/data.dart' hide Text;
@@ -73,45 +73,21 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _getTranslation();
+    _getData();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: DefaultAppBar(
-        title: 'Al-Quran',
-        actions: [
-          BlocListener<TranslateCubit, TranslateState>(
-            listener: (context, state) {
-              state.whenOrNull(
-                loaded: (isEnglishCubit) {
-                  isEnglish = isEnglishCubit;
-                  setState(() {});
-                },
-              );
-            },
-            child: TranslateIconButton(
-              isEnglish: isEnglish,
-              onPressed: () {
-                _handleTranslation();
-              },
-            ),
-          ),
-        ],
-        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-              color: DefaultStyle.primaryColor,
-              fontWeight: DefaultStyle.bold,
-            ),
-        backgroundColor: func.isDarkMode(context)
-            ? DefaultStyle.blackColor.withOpacity(0.0)
-            : DefaultStyle.whiteColor.withOpacity(0.0),
-      ),
+    return DefaultScaffold(
+      title: 'Al-Quran',
       body: Column(
         children: [
           _searchBar(),
           Expanded(
             child: ListView(
-              children: [_listSurah()],
+              children: [
+                _listSurah(),
+              ],
             ),
           ),
         ],
@@ -172,14 +148,17 @@ class _HomePageState extends State<HomePage> {
                       title: surahVar.surahNameTranslated,
                       subtitle: surahVar.surahSubtitle,
                       trailing: surahVar.surahNameArabic,
-                      onTap: () {},
+                      onTap: () {
+                        context.push('/surah/${surahVar.surahNumber}',
+                            extra: surahVar.surah);
+                      },
                     );
                   },
                 ),
               ),
             );
           },
-          error: (message) => const SizedBox(),
+          error: (message) => const Default404(),
         );
       },
     );

@@ -1,1 +1,1 @@
-export 'surah_variable.dart';
+export 'variables.dart';

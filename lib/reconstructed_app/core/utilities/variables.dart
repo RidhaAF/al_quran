@@ -23,3 +23,20 @@ class SurahVariable {
       '$surahNameTranslationTranslated • $numberOfVerses $versesTranslated • $revelationTranslated';
   String? get surahNameArabic => surah?.name?.short ?? '';
 }
+
+class VerseVariable {
+  final Verse? verse;
+  final bool isEnglish;
+
+  VerseVariable({required this.verse, required this.isEnglish});
+
+  String? get verseNumber => verse?.number?.inSurah?.toString() ?? '';
+  String? get verseArabic => verse?.text?.arab ?? '';
+  String? get verseTransliteration => verse?.text?.transliteration?.en ?? '';
+  String? get verseTranslationEn => verse?.translation?.en ?? '';
+  String? get verseTranslationId => verse?.translation?.id ?? '';
+  String? get verseTranslationTranslated =>
+      isEnglish ? verseTranslationEn : verseTranslationId;
+  String? get audio => verse?.audio?.primary ?? '';
+  String? get tafsir => verse?.tafsir?.id?.long ?? '';
+}

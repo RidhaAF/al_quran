@@ -1,15 +1,17 @@
 import 'dart:developer';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:al_quran/reconstructed_app/injection.dart';
-import 'package:al_quran/reconstructed_app/reconstructed_app.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
-/* app 
+import 'reconstructed_app/injection.dart';
+import 'reconstructed_app/reconstructed_app.dart';
+
+/* app
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  _Logging.initialize(showLog: true);
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   runApp(MyApp(savedThemeMode: savedThemeMode));
 }
