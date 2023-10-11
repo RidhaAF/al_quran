@@ -12,7 +12,7 @@ class SurahDetailUsecase {
 
   final Logger log = Logger("surah detail usecase");
 
-  Future<Either<Failure, SurahDetail>> call(int surahNumber) async {
+  Future<Either<Failure, SurahDetail>> call(int surahNumber) {
     log.fine('called');
     return surahDetailRepository.getSurahDetail(surahNumber: surahNumber);
   }
