@@ -1,50 +1,58 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:al_quran/cubits/surah/surah_cubit.dart';
-import 'package:al_quran/cubits/surah_detail/surah_detail_cubit.dart';
-import 'package:al_quran/cubits/translate/translate_cubit.dart';
-import 'package:al_quran/themes/default_themes.dart';
-import 'package:al_quran/utilities/routes.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_storage/get_storage.dart';
+import 'dart:developer';
 
+import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+
+import 'reconstructed_app/injection.dart';
+import 'reconstructed_app/reconstructed_app.dart';
+
+/* app
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  _Logging.initialize(showLog: true);
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   runApp(MyApp(savedThemeMode: savedThemeMode));
 }
+*/
 
-class MyApp extends StatelessWidget {
-  final AdaptiveThemeMode? savedThemeMode;
-  const MyApp({super.key, this.savedThemeMode});
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await injectionInit();
+  _Logging.initialize(showLog: true);
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  runApp(ReconstructedApp(savedThemeMode: savedThemeMode));
+}
 
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => SurahCubit(),
-        ),
-        BlocProvider(
-          create: (context) => SurahDetailCubit(),
-        ),
-        BlocProvider(
-          create: (context) => TranslateCubit(),
-        ),
-      ],
-      child: AdaptiveTheme(
-        light: DefaultThemes().light,
-        dark: DefaultThemes().dark,
-        initial: savedThemeMode ?? AdaptiveThemeMode.system,
-        builder: (lightTheme, darkTheme) => MaterialApp.router(
-          title: 'Al-Quran',
-          debugShowCheckedModeBanner: false,
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          routerConfig: defaultRouter,
-        ),
-      ),
-    );
+abstract class _Logging {
+  static bool isInitialize = false;
+
+  static Future<void> initialize({bool showLog = false}) async {
+    if (!_Logging.isInitialize) {
+      Logger.root.level = showLog ? Level.ALL : Level.OFF;
+
+      Logger.root.onRecord.listen((record) {
+        final level = record.level;
+        final name = record.loggerName;
+        final message = record.message;
+        final strackTrace = record.stackTrace;
+        final error = record.error;
+
+        if (level == Level.FINE ||
+            level == Level.FINER ||
+            level == Level.FINEST) {
+          log('✅ ${level.name} "$name" : $message');
+        } else if (level == Level.SEVERE ||
+            level == Level.SHOUT ||
+            level == Level.WARNING) {
+          log('⛔ ${level.name} "$name" : $message${error != null ? '\nError : $error' : ''}${strackTrace != null ? '\n$strackTrace' : ''}');
+        } else if (level == Level.INFO || level == Level.CONFIG) {
+          log('ℹ️ ${level.name} "$name" : $message');
+        }
+      });
+
+      _Logging.isInitialize = true;
+    }
   }
 }

@@ -45,3 +45,8 @@ app.*.map.json
 
 # Other files
 *env.dart
+*.g.dart 
+*.freezed.dart
+
+# test coverage
+/coverage
