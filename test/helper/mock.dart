@@ -21,6 +21,7 @@ export 'mock.mocks.dart';
   // Domain
   MockSpec<SurahUsecase>(),
   MockSpec<SurahDetailUsecase>(),
+  MockSpec<VerseUsecase>(),
 
   // Presentation
   MockSpec<SurahCubit>(),
