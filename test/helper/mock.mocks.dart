@@ -135,8 +135,8 @@ class _FakeSurahDetail_8 extends _i1.SmartFake implements _i10.SurahDetail {
         );
 }
 
-class _FakeEither_9<L, R> extends _i1.SmartFake implements _i11.Either<L, R> {
-  _FakeEither_9(
+class _FakeVerse_9 extends _i1.SmartFake implements _i10.Verse {
+  _FakeVerse_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -145,9 +145,19 @@ class _FakeEither_9<L, R> extends _i1.SmartFake implements _i11.Either<L, R> {
         );
 }
 
-class _FakeSurahRepository_10 extends _i1.SmartFake
+class _FakeEither_10<L, R> extends _i1.SmartFake implements _i11.Either<L, R> {
+  _FakeEither_10(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeSurahRepository_11 extends _i1.SmartFake
     implements _i12.SurahRepository {
-  _FakeSurahRepository_10(
+  _FakeSurahRepository_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -156,8 +166,8 @@ class _FakeSurahRepository_10 extends _i1.SmartFake
         );
 }
 
-class _FakeLogger_11 extends _i1.SmartFake implements _i13.Logger {
-  _FakeLogger_11(
+class _FakeLogger_12 extends _i1.SmartFake implements _i13.Logger {
+  _FakeLogger_12(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -166,9 +176,9 @@ class _FakeLogger_11 extends _i1.SmartFake implements _i13.Logger {
         );
 }
 
-class _FakeSurahDetailRepository_12 extends _i1.SmartFake
+class _FakeSurahDetailRepository_13 extends _i1.SmartFake
     implements _i12.SurahDetailRepository {
-  _FakeSurahDetailRepository_12(
+  _FakeSurahDetailRepository_13(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -177,8 +187,8 @@ class _FakeSurahDetailRepository_12 extends _i1.SmartFake
         );
 }
 
-class _FakeSurahUsecase_13 extends _i1.SmartFake implements _i12.SurahUsecase {
-  _FakeSurahUsecase_13(
+class _FakeSurahUsecase_14 extends _i1.SmartFake implements _i12.SurahUsecase {
+  _FakeSurahUsecase_14(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -187,8 +197,8 @@ class _FakeSurahUsecase_13 extends _i1.SmartFake implements _i12.SurahUsecase {
         );
 }
 
-class _FakeSurahState_14 extends _i1.SmartFake implements _i14.SurahState {
-  _FakeSurahState_14(
+class _FakeSurahState_15 extends _i1.SmartFake implements _i14.SurahState {
+  _FakeSurahState_15(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -197,9 +207,9 @@ class _FakeSurahState_14 extends _i1.SmartFake implements _i14.SurahState {
         );
 }
 
-class _FakeSurahDetailUsecase_15 extends _i1.SmartFake
+class _FakeSurahDetailUsecase_16 extends _i1.SmartFake
     implements _i12.SurahDetailUsecase {
-  _FakeSurahDetailUsecase_15(
+  _FakeSurahDetailUsecase_16(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -208,9 +218,9 @@ class _FakeSurahDetailUsecase_15 extends _i1.SmartFake
         );
 }
 
-class _FakeSurahDetailState_16 extends _i1.SmartFake
+class _FakeSurahDetailState_17 extends _i1.SmartFake
     implements _i15.SurahDetailState {
-  _FakeSurahDetailState_16(
+  _FakeSurahDetailState_17(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -219,8 +229,8 @@ class _FakeSurahDetailState_16 extends _i1.SmartFake
         );
 }
 
-class _FakeGetStorage_17 extends _i1.SmartFake implements _i7.GetStorage {
-  _FakeGetStorage_17(
+class _FakeGetStorage_18 extends _i1.SmartFake implements _i7.GetStorage {
+  _FakeGetStorage_18(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -229,9 +239,9 @@ class _FakeGetStorage_17 extends _i1.SmartFake implements _i7.GetStorage {
         );
 }
 
-class _FakeTranslateState_18 extends _i1.SmartFake
+class _FakeTranslateState_19 extends _i1.SmartFake
     implements _i16.TranslateState {
-  _FakeTranslateState_18(
+  _FakeTranslateState_19(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -1508,6 +1518,46 @@ class MockSurahDetailProvider extends _i1.Mock
       ) as _i18.Future<_i10.SurahDetail>);
 }
 
+/// A class which mocks [VerseProvider].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockVerseProvider extends _i1.Mock implements _i10.VerseProvider {
+  @override
+  _i18.Future<_i10.Verse> getVerse(
+    int? surahNumber,
+    int? verseNumber,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getVerse,
+          [
+            surahNumber,
+            verseNumber,
+          ],
+        ),
+        returnValue: _i18.Future<_i10.Verse>.value(_FakeVerse_9(
+          this,
+          Invocation.method(
+            #getVerse,
+            [
+              surahNumber,
+              verseNumber,
+            ],
+          ),
+        )),
+        returnValueForMissingStub: _i18.Future<_i10.Verse>.value(_FakeVerse_9(
+          this,
+          Invocation.method(
+            #getVerse,
+            [
+              surahNumber,
+              verseNumber,
+            ],
+          ),
+        )),
+      ) as _i18.Future<_i10.Verse>);
+}
+
 /// A class which mocks [SurahRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1521,7 +1571,7 @@ class MockSurahRepository extends _i1.Mock implements _i12.SurahRepository {
         ),
         returnValue:
             _i18.Future<_i11.Either<_i23.Failure, List<_i10.Surah>>>.value(
-                _FakeEither_9<_i23.Failure, List<_i10.Surah>>(
+                _FakeEither_10<_i23.Failure, List<_i10.Surah>>(
           this,
           Invocation.method(
             #getSurahs,
@@ -1530,7 +1580,7 @@ class MockSurahRepository extends _i1.Mock implements _i12.SurahRepository {
         )),
         returnValueForMissingStub:
             _i18.Future<_i11.Either<_i23.Failure, List<_i10.Surah>>>.value(
-                _FakeEither_9<_i23.Failure, List<_i10.Surah>>(
+                _FakeEither_10<_i23.Failure, List<_i10.Surah>>(
           this,
           Invocation.method(
             #getSurahs,
@@ -1556,7 +1606,7 @@ class MockSurahDetailRepository extends _i1.Mock
         ),
         returnValue:
             _i18.Future<_i11.Either<_i23.Failure, _i10.SurahDetail>>.value(
-                _FakeEither_9<_i23.Failure, _i10.SurahDetail>(
+                _FakeEither_10<_i23.Failure, _i10.SurahDetail>(
           this,
           Invocation.method(
             #getSurahDetail,
@@ -1566,7 +1616,7 @@ class MockSurahDetailRepository extends _i1.Mock
         )),
         returnValueForMissingStub:
             _i18.Future<_i11.Either<_i23.Failure, _i10.SurahDetail>>.value(
-                _FakeEither_9<_i23.Failure, _i10.SurahDetail>(
+                _FakeEither_10<_i23.Failure, _i10.SurahDetail>(
           this,
           Invocation.method(
             #getSurahDetail,
@@ -1577,6 +1627,49 @@ class MockSurahDetailRepository extends _i1.Mock
       ) as _i18.Future<_i11.Either<_i23.Failure, _i10.SurahDetail>>);
 }
 
+/// A class which mocks [VerseRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockVerseRepository extends _i1.Mock implements _i12.VerseRepository {
+  @override
+  _i18.Future<_i11.Either<_i23.Failure, _i10.Verse>> getVerse(
+    int? surahNumber,
+    int? verseNumber,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getVerse,
+          [
+            surahNumber,
+            verseNumber,
+          ],
+        ),
+        returnValue: _i18.Future<_i11.Either<_i23.Failure, _i10.Verse>>.value(
+            _FakeEither_10<_i23.Failure, _i10.Verse>(
+          this,
+          Invocation.method(
+            #getVerse,
+            [
+              surahNumber,
+              verseNumber,
+            ],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i18.Future<_i11.Either<_i23.Failure, _i10.Verse>>.value(
+                _FakeEither_10<_i23.Failure, _i10.Verse>(
+          this,
+          Invocation.method(
+            #getVerse,
+            [
+              surahNumber,
+              verseNumber,
+            ],
+          ),
+        )),
+      ) as _i18.Future<_i11.Either<_i23.Failure, _i10.Verse>>);
+}
+
 /// A class which mocks [SurahUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1584,11 +1677,11 @@ class MockSurahUsecase extends _i1.Mock implements _i12.SurahUsecase {
   @override
   _i12.SurahRepository get surahRepository => (super.noSuchMethod(
         Invocation.getter(#surahRepository),
-        returnValue: _FakeSurahRepository_10(
+        returnValue: _FakeSurahRepository_11(
           this,
           Invocation.getter(#surahRepository),
         ),
-        returnValueForMissingStub: _FakeSurahRepository_10(
+        returnValueForMissingStub: _FakeSurahRepository_11(
           this,
           Invocation.getter(#surahRepository),
         ),
@@ -1597,11 +1690,11 @@ class MockSurahUsecase extends _i1.Mock implements _i12.SurahUsecase {
   @override
   _i13.Logger get log => (super.noSuchMethod(
         Invocation.getter(#log),
-        returnValue: _FakeLogger_11(
+        returnValue: _FakeLogger_12(
           this,
           Invocation.getter(#log),
         ),
-        returnValueForMissingStub: _FakeLogger_11(
+        returnValueForMissingStub: _FakeLogger_12(
           this,
           Invocation.getter(#log),
         ),
@@ -1616,7 +1709,7 @@ class MockSurahUsecase extends _i1.Mock implements _i12.SurahUsecase {
         ),
         returnValue:
             _i18.Future<_i11.Either<_i23.Failure, List<_i10.Surah>>>.value(
-                _FakeEither_9<_i23.Failure, List<_i10.Surah>>(
+                _FakeEither_10<_i23.Failure, List<_i10.Surah>>(
           this,
           Invocation.method(
             #call,
@@ -1625,7 +1718,7 @@ class MockSurahUsecase extends _i1.Mock implements _i12.SurahUsecase {
         )),
         returnValueForMissingStub:
             _i18.Future<_i11.Either<_i23.Failure, List<_i10.Surah>>>.value(
-                _FakeEither_9<_i23.Failure, List<_i10.Surah>>(
+                _FakeEither_10<_i23.Failure, List<_i10.Surah>>(
           this,
           Invocation.method(
             #call,
@@ -1643,15 +1736,28 @@ class MockSurahDetailUsecase extends _i1.Mock
   @override
   _i12.SurahDetailRepository get surahDetailRepository => (super.noSuchMethod(
         Invocation.getter(#surahDetailRepository),
-        returnValue: _FakeSurahDetailRepository_12(
+        returnValue: _FakeSurahDetailRepository_13(
           this,
           Invocation.getter(#surahDetailRepository),
         ),
-        returnValueForMissingStub: _FakeSurahDetailRepository_12(
+        returnValueForMissingStub: _FakeSurahDetailRepository_13(
           this,
           Invocation.getter(#surahDetailRepository),
         ),
       ) as _i12.SurahDetailRepository);
+
+  @override
+  _i13.Logger get log => (super.noSuchMethod(
+        Invocation.getter(#log),
+        returnValue: _FakeLogger_12(
+          this,
+          Invocation.getter(#log),
+        ),
+        returnValueForMissingStub: _FakeLogger_12(
+          this,
+          Invocation.getter(#log),
+        ),
+      ) as _i13.Logger);
 
   @override
   _i18.Future<_i11.Either<_i23.Failure, _i10.SurahDetail>> call(
@@ -1663,7 +1769,7 @@ class MockSurahDetailUsecase extends _i1.Mock
         ),
         returnValue:
             _i18.Future<_i11.Either<_i23.Failure, _i10.SurahDetail>>.value(
-                _FakeEither_9<_i23.Failure, _i10.SurahDetail>(
+                _FakeEither_10<_i23.Failure, _i10.SurahDetail>(
           this,
           Invocation.method(
             #call,
@@ -1672,7 +1778,7 @@ class MockSurahDetailUsecase extends _i1.Mock
         )),
         returnValueForMissingStub:
             _i18.Future<_i11.Either<_i23.Failure, _i10.SurahDetail>>.value(
-                _FakeEither_9<_i23.Failure, _i10.SurahDetail>(
+                _FakeEither_10<_i23.Failure, _i10.SurahDetail>(
           this,
           Invocation.method(
             #call,
@@ -1689,11 +1795,11 @@ class MockSurahCubit extends _i1.Mock implements _i14.SurahCubit {
   @override
   _i12.SurahUsecase get surahUsecase => (super.noSuchMethod(
         Invocation.getter(#surahUsecase),
-        returnValue: _FakeSurahUsecase_13(
+        returnValue: _FakeSurahUsecase_14(
           this,
           Invocation.getter(#surahUsecase),
         ),
-        returnValueForMissingStub: _FakeSurahUsecase_13(
+        returnValueForMissingStub: _FakeSurahUsecase_14(
           this,
           Invocation.getter(#surahUsecase),
         ),
@@ -1711,11 +1817,11 @@ class MockSurahCubit extends _i1.Mock implements _i14.SurahCubit {
   @override
   _i14.SurahState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeSurahState_14(
+        returnValue: _FakeSurahState_15(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _FakeSurahState_14(
+        returnValueForMissingStub: _FakeSurahState_15(
           this,
           Invocation.getter(#state),
         ),
@@ -1812,11 +1918,11 @@ class MockSurahDetailCubit extends _i1.Mock implements _i15.SurahDetailCubit {
   @override
   _i12.SurahDetailUsecase get surahDetailusecase => (super.noSuchMethod(
         Invocation.getter(#surahDetailusecase),
-        returnValue: _FakeSurahDetailUsecase_15(
+        returnValue: _FakeSurahDetailUsecase_16(
           this,
           Invocation.getter(#surahDetailusecase),
         ),
-        returnValueForMissingStub: _FakeSurahDetailUsecase_15(
+        returnValueForMissingStub: _FakeSurahDetailUsecase_16(
           this,
           Invocation.getter(#surahDetailusecase),
         ),
@@ -1847,11 +1953,11 @@ class MockSurahDetailCubit extends _i1.Mock implements _i15.SurahDetailCubit {
   @override
   _i15.SurahDetailState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeSurahDetailState_16(
+        returnValue: _FakeSurahDetailState_17(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _FakeSurahDetailState_16(
+        returnValueForMissingStub: _FakeSurahDetailState_17(
           this,
           Invocation.getter(#state),
         ),
@@ -1949,11 +2055,11 @@ class MockTranslateCubit extends _i1.Mock implements _i16.TranslateCubit {
   @override
   _i7.GetStorage get box => (super.noSuchMethod(
         Invocation.getter(#box),
-        returnValue: _FakeGetStorage_17(
+        returnValue: _FakeGetStorage_18(
           this,
           Invocation.getter(#box),
         ),
-        returnValueForMissingStub: _FakeGetStorage_17(
+        returnValueForMissingStub: _FakeGetStorage_18(
           this,
           Invocation.getter(#box),
         ),
@@ -1978,11 +2084,11 @@ class MockTranslateCubit extends _i1.Mock implements _i16.TranslateCubit {
   @override
   _i16.TranslateState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeTranslateState_18(
+        returnValue: _FakeTranslateState_19(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _FakeTranslateState_18(
+        returnValueForMissingStub: _FakeTranslateState_19(
           this,
           Invocation.getter(#state),
         ),

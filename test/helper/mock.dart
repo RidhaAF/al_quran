@@ -16,6 +16,7 @@ export 'mock.mocks.dart';
   MockSpec<VerseProvider>(),
   MockSpec<SurahRepository>(),
   MockSpec<SurahDetailRepository>(),
+  MockSpec<VerseRepository>(),
 
   // Domain
   MockSpec<SurahUsecase>(),
