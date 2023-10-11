@@ -32,7 +32,6 @@ Future<void> injectionInit() async {
   di.registerFactory<SurahProvider>(() => SurahProviderImpl(dio: di<Dio>()));
   di.registerFactory<SurahDetailProvider>(
       () => SurahDetailProviderImpl(dio: di<Dio>()));
-  di.registerFactory<VerseProvider>(() => VerseProviderImpl(dio: di<Dio>()));
 
   /*---------------------- domain repository ----------------------*/
   di.registerLazySingleton<SurahRepository>(

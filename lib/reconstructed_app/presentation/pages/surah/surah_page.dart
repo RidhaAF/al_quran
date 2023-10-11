@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -56,10 +58,30 @@ class _SurahPageState extends State<SurahPage> {
     surahNumber = widget.surahNumber ?? 0;
 
     var surah = SurahVariable(widget.surah, isEnglish);
-    return DefaultScaffold(
-      isEnglish: isEnglish,
-      title: '${surah.surahNumber}. ${surah.surahNameTranslated}',
-      subtitle: surah.surahNameTranslationTranslated,
+    return Scaffold(
+      appBar: DefaultAppBar(
+        title: '$surahNumber. ${surah.surahNameTranslated}',
+        subtitle: surah.surahNameTranslationTranslated,
+        actions: [
+          BlocListener<TranslateCubit, TranslateState>(
+            listener: (context, state) {
+              state.whenOrNull(
+                loaded: (isEnglishCubit) {
+                  isEnglish = isEnglishCubit;
+                  setState(() {});
+                },
+              );
+            },
+            child: TranslateIconButton(
+              isEnglish: isEnglish,
+              onPressed: () {
+                log('isEnglish: $isEnglish');
+                _handleTranslation();
+              },
+            ),
+          ),
+        ],
+      ),
       body: DefaultRefreshIndicator(
         onRefresh: _onRefresh,
         child: BlocBuilder<SurahDetailCubit, SurahDetailState>(
@@ -122,7 +144,7 @@ class _SurahPageState extends State<SurahPage> {
           return InkWell(
             onTap: () {
               context.push(
-                'surah/$surahNumber/${verseVar.verseNumber}',
+                '/surah/$surahNumber/${verseVar.verseNumber}',
                 extra: {
                   'surah': widget.surah,
                   'verse': verseVar.verse,

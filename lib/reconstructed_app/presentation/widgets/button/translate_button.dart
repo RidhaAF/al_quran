@@ -5,10 +5,12 @@ import '../../../core/core.dart';
 class TranslateIconButton extends StatelessWidget {
   final bool isEnglish;
   final Function() onPressed;
+  final Color? iconColor;
   const TranslateIconButton({
     super.key,
     required this.isEnglish,
     required this.onPressed,
+    this.iconColor,
   });
 
   @override
@@ -21,7 +23,7 @@ class TranslateIconButton extends StatelessWidget {
       onPressed: onPressed,
       icon: Icon(
         Icons.translate_rounded,
-        color: DefaultStyle.primaryColor,
+        color: iconColor,
       ),
       highlightColor: DefaultStyle.mutedColor.withOpacity(0.3),
       tooltip: tooltip,
